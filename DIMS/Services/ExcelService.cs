@@ -1,6 +1,7 @@
 ﻿// Services/ExcelService.cs
 using System.IO;
 using DIMS.Models;
+using DIMS.Utils;
 using OfficeOpenXml;
 
 namespace DIMS.Services
@@ -63,7 +64,7 @@ namespace DIMS.Services
                     worksheet.Cells[currentRow, 15].Value = $"{issue.Tracker.Id}_{issue.Tracker.Name}";
                     worksheet.Cells[currentRow, 16].Value = issue.Subject;
                     worksheet.Cells[currentRow, 17].Value = $"{issue.Tracker.Id}_{issue.Tracker.Name}";
-                    worksheet.Cells[currentRow, 18].Value = issue.Description;
+                    worksheet.Cells[currentRow, 18].Value = HtmlUtils.ConvertHtmlToPlainText(issue.Description);
                     worksheet.Cells[currentRow, 19].Value = $"{issue.AssignedTo.Id}_{issue.AssignedTo.Name}";
                     worksheet.Cells[currentRow, 20].Value = issue.StartDate;
                     worksheet.Cells[currentRow, 21].Value = issue.DueDate;
