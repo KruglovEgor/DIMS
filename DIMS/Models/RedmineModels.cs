@@ -75,8 +75,8 @@ namespace DIMS.Models
         [JsonPropertyName("estimated_hours")]
         public decimal? EstimatedHours { get; set; }
 
-        [JsonPropertyName("parent")]
-        public RedmineIssueParent Parent { get; set; }
+        //[JsonPropertyName("parent")]
+        //public RedmineIssueParent Parent { get; set; }
 
         [JsonPropertyName("custom_fields")]
         public List<RedmineCustomField> CustomFields { get; set; }
@@ -89,11 +89,11 @@ namespace DIMS.Models
 
     }
 
-    public class RedmineIssueParent
-    {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-    }
+    //public class RedmineIssueParent
+    //{
+    //    [JsonPropertyName("id")]
+    //    public int Id { get; set; }
+    //}
 
     public class RedmineCustomField
     {

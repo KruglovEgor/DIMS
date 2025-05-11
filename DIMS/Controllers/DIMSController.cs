@@ -74,15 +74,7 @@ namespace DIMS.Controllers
                     return NotFound($"Проект '{projectName}' не найден или данные имеют неверный формат");
                 }
 
-                // Логирование custom fields проекта для отладки
-                if (projectData.Project.CustomFields != null)
-                {
-                    foreach (var cf in projectData.Project.CustomFields)
-                    {
-                        _logger.LogDebug($"Проект custom field: ID={cf.Id}, Name={cf.Name}, Value={cf.Value}");
-                    }
-                }
-
+                
                 // 2. Получаем задачи проекта с включением необходимых полей
                 var issuesResponse = await _httpClient.GetAsync(
                     $"projects/{projectName}/issues.json?status_id=*&include=custom_fields");
@@ -97,23 +89,6 @@ namespace DIMS.Controllers
                     if (issuesData?.Issues != null)
                     {
                         projectData.Project.Issues = issuesData.Issues;
-
-                        // Логирование custom fields и parent у задач для отладки
-                        //foreach (var issue in issuesData.Issues)
-                        //{
-                        //    if (issue.Parent != null)
-                        //    {
-                        //        _logger.LogDebug($"Задача ID={issue.Subject ?? "без названия"} имеет родительскую задачу: {issue.Parent.Id}");
-                        //    }
-
-                        //    if (issue.CustomFields != null)
-                        //    {
-                        //        foreach (var cf in issue.CustomFields)
-                        //        {
-                        //            _logger.LogDebug($"Задача custom field: ID={cf.Id}, Name={cf.Name}, Value={cf.Value}");
-                        //        }
-                        //    }
-                        //}
                     }
                 }
                 else
